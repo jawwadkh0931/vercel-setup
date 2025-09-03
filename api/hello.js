@@ -22,7 +22,8 @@ export default function handler(req, res) {
     items = items.filter(i => i.id !== id);
     res.status(200).json({ message: "Deleted" });
   }else if (req.method === "PUT") {
-  const id = parseInt(req.query.id);
+//   const id = parseInt(req.query.id);
+  const id = Number(req.query.id); if (isNaN(id)) return res.status(400).json({ message: "Invalid id" });
   const body = req.body;
   const item = items.find(i => i.id === id);
   if (item) {
