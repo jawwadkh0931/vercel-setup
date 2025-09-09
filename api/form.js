@@ -12,8 +12,13 @@ export default function handler(req, res) {
   }
 
   if (req.method === "GET") {
+    if (req.query.id) {
+      const employee = employees.find(e => e.id === Number(req.query.id));
+      return res.status(200).json(employee || { message: "Not found" });
+    }
     return res.status(200).json(employees);
-  } 
+}
+
   else if (req.method === "POST") {
     const body = req.body;
     const newEmployee = { 
